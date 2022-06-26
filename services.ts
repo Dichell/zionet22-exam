@@ -1,9 +1,10 @@
 // Ideas:
 // Build dynamically created classmates: collection of first names, collection of lastnames, randomly pick birth date
 
+import { match } from "assert";
 import { firstNames, Geography, lastNames, Mathematics } from "./constants";
 import { Classroom, School, Student, Teacher } from "./entities";
-import { getRandomBirthDate, getRandomValueFromArray } from "./helpers";
+import { fullName, getRandomBirthDate, getRandomValueFromArray } from "./helpers";
 
 export function initializeSchool(): School {
     const student1: Student = createStudent(getRandomValueFromArray(firstNames), getRandomValueFromArray(lastNames), getRandomBirthDate());
@@ -62,7 +63,9 @@ function createClassroom(name: string, teacher: Teacher, students: Student[]): C
 }
 
 export function getClassYoungestStudent(classroom: Classroom): string {
-    return classroom.students[1].firstName;
+    //return Math.min(...classroom.students.map((a)=>getAge(a))); 
+    const sortedStudents: Student[] = classroom.students.sort((a, b)=> getAge(a) - getAge(b))
+    return fullName(sortedStudents[0]);
 }
 
 export function getAge(student: Student): number {
@@ -72,13 +75,11 @@ export function getAge(student: Student): number {
 };
 
 export function printSchool(school: School): void {
-
     console.log("School data:\n============");
     console.log(school.name);
     console.log(school.address);
     console.log(school.phone);
     console.log("\nClasses:\n============");
-
     let numClass: number = 1;
     for (const classes of school.classes){
         console.log(`Class ${numClass}:`, classes.name);
@@ -91,7 +92,5 @@ export function printSchool(school: School): void {
             numStudent++;
         }
     }
-
-
 }
 

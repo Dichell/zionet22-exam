@@ -1,3 +1,5 @@
+import { Student } from "./entities";
+
 export function getRandomValueFromArray(array: string[]): string {
     return array[Math.floor(Math.random() * array.length)];
 }
@@ -10,8 +12,8 @@ export function getRandomBirthDate(): Date {
 }
 
 
-export function fullName(firstName: string, lastName: string): string {
-    return firstName + " " + lastName;
+export function fullName(student: Student): string {
+    return student.firstName + " " + student.lastName;
 }
 
 // console.log("Exam 4:", fullName("Kole", "Dow"))
