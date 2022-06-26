@@ -80,17 +80,13 @@ export function printSchool(school: School): void {
     console.log("\nClasses:\n============");
 
     let numClass: number = 1;
-    for (let i = 0; i < school.classes.length; i++) {
-        console.log(`Class ${numClass}:`, school.classes[i].name);
-        console.log("Teacher:", school.classes[i].teacher.firstName + " " + school.classes[i].teacher.lastName + ", " + school.classes[i].teacher.professions);
+    for (const classes of school.classes){
+        console.log(`Class ${numClass}:`, classes.name);
+        console.log("Teacher:", classes.teacher.firstName + " " + classes.teacher.lastName + ", " + classes.teacher.professions);
         console.log("Students:");
         numClass++;
         let numStudent: number = 1;
-        // for (let j = 0; j < school.classes[i].students.length; j++){
-        //     console.log(`${numStudent}: ${school.classes[i].students[j].firstName} ${school.classes[i].students[j].lastName}:`,getAge(school.classes[i].students[j]));
-        //     numStudent++;
-        // }
-        for (const students of school.classes[i].students){
+        for (const students of classes.students){
             console.log(`${numStudent}: ${students.firstName} ${students.lastName}:`,getAge(students));
             numStudent++;
         }
