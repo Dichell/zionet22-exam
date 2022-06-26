@@ -6,6 +6,7 @@ import { firstNames, Geography, lastNames, Mathematics } from "./constants";
 import { Classroom, School, Student, Teacher } from "./entities";
 import { fullName, getRandomBirthDate, getRandomValueFromArray } from "./helpers";
 
+
 export function initializeSchool(): School {
     const student1: Student = createStudent(getRandomValueFromArray(firstNames), getRandomValueFromArray(lastNames), getRandomBirthDate());
     const student2: Student = createStudent(getRandomValueFromArray(firstNames), getRandomValueFromArray(lastNames), getRandomBirthDate());
@@ -35,6 +36,7 @@ export function initializeSchool(): School {
     }
 }
 
+
 function createTeacher(firstName: string, lastName: string, professions: string[]): Teacher {
     return {
         firstName: firstName,
@@ -42,6 +44,7 @@ function createTeacher(firstName: string, lastName: string, professions: string[
         professions: professions
     };
 }
+
 
 function createStudent(firstName: string, lastName: string, birthDate: Date): Student {
     return {
@@ -54,6 +57,7 @@ function createStudent(firstName: string, lastName: string, birthDate: Date): St
     };
 }
 
+
 function createClassroom(name: string, teacher: Teacher, students: Student[]): Classroom {
     return {
         name: name,
@@ -62,10 +66,12 @@ function createClassroom(name: string, teacher: Teacher, students: Student[]): C
     };
 }
 
+
 export function getClassYoungestStudent(classroom: Classroom): string {
     const sortedStudents: Student[] = classroom.students.sort((a, b) => getAge(a) - getAge(b))
     return fullName(sortedStudents[0]);
 }
+
 
 export function getAge(student: Student): number {
     const ageDifferentMs: number = Date.now() - student.birthDate.getTime();
@@ -73,30 +79,33 @@ export function getAge(student: Student): number {
     return Math.abs(ageDate.getUTCFullYear() - 1969);
 };
 
+
+export function transferStudent(fullName: string, fromClassroom: Classroom, toClassrom: Classroom): void {
+    
+}
+
+
 export function printSchool(school: School): void {
     console.log("School data:\n============");
     console.log(school.name);
     console.log(school.address);
     console.log(school.phone);
     console.log("\nClasses:\n============");
-    let numClass: number = 1;
-
+    
+    let orderClass: number = 1;
     const sortedClasses: Classroom[] = school.classes.sort((a, b) => a.name < b.name ? -1 : 1)
-
     for (const classes of sortedClasses) {
-        console.log(`Class ${numClass}:`, classes.name);
+        console.log(`Class ${orderClass}:`, classes.name);
         console.log("Teacher:", classes.teacher.firstName + " " + classes.teacher.lastName + ", " + classes.teacher.professions);
         console.log("Students:");
-        numClass++;
+        orderClass++;
 
-        let numStudent: number = 1;
-
+        let orderStudents: number = 1;
         const sortedStudentsByLastName: Student[] = classes.students.sort((a, b) => (
             a.lastName + a.firstName).toLowerCase() < (b.lastName + b.firstName).toLowerCase() ? -1 : 1)
-
         for (const students of sortedStudentsByLastName) {
-            console.log(`${numStudent}: ${students.firstName} ${students.lastName}:`, getAge(students));
-            numStudent++;
+            console.log(`${orderStudents}: ${students.firstName} ${students.lastName}:`, getAge(students));
+            orderStudents++;
         }
     }
 }
