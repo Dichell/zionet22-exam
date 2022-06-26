@@ -9,4 +9,3 @@ printSchool(school);
 console.log("\nExam 4:", fullName(school.classes[0].students[0]))
 
 console.log("\nExam 5:", getClassYoungestStudentFullName(school.classes[0]));
-
