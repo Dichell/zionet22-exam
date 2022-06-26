@@ -73,14 +73,12 @@ export function getAge(student: Student): number {
 
 export function printSchool(school: School): void {
 
-    console.log("School data:");
-    console.log("============");
+    console.log("School data:\n============");
     console.log(school.name);
     console.log(school.address);
     console.log(school.phone);
-    console.log("");
-    console.log("Classes:");
-    console.log("============");
+    console.log("\nClasses:\n============");
+
     let numClass: number = 1;
     for (let i = 0; i < school.classes.length; i++) {
         console.log(`Class ${numClass}:`, school.classes[i].name);
@@ -88,11 +86,16 @@ export function printSchool(school: School): void {
         console.log("Students:");
         numClass++;
         let numStudent: number = 1;
-        for (let j = 0; j < school.classes[i].students.length; j++){
-            console.log(`${numStudent}: ${school.classes[i].students[j].firstName} ${school.classes[i].students[j].lastName}:`,getAge(school.classes[i].students[j]));
+        // for (let j = 0; j < school.classes[i].students.length; j++){
+        //     console.log(`${numStudent}: ${school.classes[i].students[j].firstName} ${school.classes[i].students[j].lastName}:`,getAge(school.classes[i].students[j]));
+        //     numStudent++;
+        // }
+        for (const students of school.classes[i].students){
+            console.log(`${numStudent}: ${students.firstName} ${students.lastName}:`,getAge(students));
             numStudent++;
         }
     }
 
 
 }
+
