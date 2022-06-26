@@ -5,4 +5,4 @@ const school: School = initializeSchool();
 
 printSchool(school);
 
-console.log(getClassYoungestStudentFullName(school.classes[0]));
+// console.log(getClassYoungestStudentFullName(school.classes[0]));

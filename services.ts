@@ -21,7 +21,7 @@ export function initializeSchool(): School {
     const teacher2: Teacher = createTeacher(getRandomValueFromArray(firstNames), getRandomValueFromArray(lastNames), [Geography]);
 
     const mathClass: Classroom = createClassroom("Math", teacher1, [student1, student2, student3, student4]);
-    const geographyClass: Classroom = createClassroom("Geography", teacher1, [student5, student6, student7, student8]);
+    const geographyClass: Classroom = createClassroom("Geography", teacher2, [student5, student6, student7, student8]);
 
     return {
         name: "Big school",
@@ -47,7 +47,7 @@ function createStudent(firstName: string, lastName: string, birthDate: Date): St
         firstName: firstName,
         lastName: lastName,
         birthDate: birthDate,
-        age: () => { 
+        age: () => {
             return 0;
         }
     };
@@ -56,19 +56,37 @@ function createStudent(firstName: string, lastName: string, birthDate: Date): St
 function createClassroom(name: string, teacher: Teacher, students: Student[]): Classroom {
     return {
         name: name,
-        teacher: teacher, 
+        teacher: teacher,
         students: students
     };
 }
 
 export function getClassYoungestStudent(classroom: Classroom): string {
-    return classroom.students[10].firstName;
+    return classroom.students[1].firstName;
 }
 
 export function printSchool(school: School): void {
+
     console.log("School data:");
     console.log("============");
     console.log(school.name);
     console.log(school.address);
     console.log(school.phone);
+    console.log("");
+    console.log("Classes:");
+    console.log("============");
+    let numClass: number = 1;
+    for (let i = 0; i < school.classes.length; i++) {
+        console.log("Class", numClass, ":", school.classes[i].name);
+        console.log("Teacher:", school.classes[i].teacher.firstName + " " + school.classes[i].teacher.lastName + ", " + school.classes[i].teacher.professions);
+        console.log("Students:");
+        numClass++;
+        let numStudent: number = 1;
+        for (let j = 0; j < school.classes[i].students.length; j++){
+            console.log(numStudent, school.classes[i].students[j].firstName + " " + school.classes[i].students[j].lastName);
+            numStudent++;
+        }
+    }
+
+
 }
