@@ -65,6 +65,12 @@ export function getClassYoungestStudent(classroom: Classroom): string {
     return classroom.students[1].firstName;
 }
 
+function getAge(student: Student): number {
+    const ageDifferentMs: number = Date.now() - student.birthDate.getTime();
+    let ageDate: Date = new Date(ageDifferentMs)
+    return Math.abs(ageDate.getUTCFullYear() - 1969);
+};
+
 export function printSchool(school: School): void {
 
     console.log("School data:");
@@ -77,13 +83,13 @@ export function printSchool(school: School): void {
     console.log("============");
     let numClass: number = 1;
     for (let i = 0; i < school.classes.length; i++) {
-        console.log("Class", numClass, ":", school.classes[i].name);
+        console.log(`Class ${numClass}:`, school.classes[i].name);
         console.log("Teacher:", school.classes[i].teacher.firstName + " " + school.classes[i].teacher.lastName + ", " + school.classes[i].teacher.professions);
         console.log("Students:");
         numClass++;
         let numStudent: number = 1;
         for (let j = 0; j < school.classes[i].students.length; j++){
-            console.log(numStudent, school.classes[i].students[j].firstName + " " + school.classes[i].students[j].lastName);
+            console.log(`${numStudent}: ${school.classes[i].students[j].firstName} ${school.classes[i].students[j].lastName}:`,getAge(school.classes[i].students[j]));
             numStudent++;
         }
     }
