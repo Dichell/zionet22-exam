@@ -65,7 +65,7 @@ export function getClassYoungestStudent(classroom: Classroom): string {
     return classroom.students[1].firstName;
 }
 
-function getAge(student: Student): number {
+export function getAge(student: Student): number {
     const ageDifferentMs: number = Date.now() - student.birthDate.getTime();
     let ageDate: Date = new Date(ageDifferentMs)
     return Math.abs(ageDate.getUTCFullYear() - 1969);

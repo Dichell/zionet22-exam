@@ -17,8 +17,10 @@ Class 2 (in case exists and so on iterating over the sholw collection of classro
 ...
 
 (5%) 2. Explain why History constant cannot be used in constants.ts
+- it s'not executing because thw row was commented 
 
 (5%) 3. Provide a solution for #2.
+- just delete "//" in start of the row
 
 (5%) 4. Add fullName() method to helpers.ts that receives firstName and lastName;
 	(2%) 4.1. Add fullName() method to Teacher and Student types that utilizes method added in #4.

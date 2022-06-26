@@ -8,7 +8,7 @@ export type Student = {
     firstName: string;
     lastName: string;
     birthDate: Date;
-    age: () => number
+    age: () => number;
 };
 
 export type Classroom = {

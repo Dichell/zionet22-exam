@@ -9,5 +9,11 @@ export function getRandomBirthDate(): Date {
     return new Date(year, month, day);
 }
 
-console.log(Math.floor)
-console.log(Math.random())
+
+export function fullName(firstName: string, lastName: string): string {
+    return firstName + " " + lastName;
+}
+
+console.log("Exam 4:", fullName("Kole", "Dow"))
+
+
