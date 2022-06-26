@@ -63,8 +63,7 @@ function createClassroom(name: string, teacher: Teacher, students: Student[]): C
 }
 
 export function getClassYoungestStudent(classroom: Classroom): string {
-    //return Math.min(...classroom.students.map((a)=>getAge(a))); 
-    const sortedStudents: Student[] = classroom.students.sort((a, b)=> getAge(a) - getAge(b))
+    const sortedStudents: Student[] = classroom.students.sort((a, b) => getAge(a) - getAge(b))
     return fullName(sortedStudents[0]);
 }
 
@@ -81,14 +80,22 @@ export function printSchool(school: School): void {
     console.log(school.phone);
     console.log("\nClasses:\n============");
     let numClass: number = 1;
-    for (const classes of school.classes){
+
+    const sortedClasses: Classroom[] = school.classes.sort((a, b) => a.name < b.name ? -1 : 1)
+
+    for (const classes of sortedClasses) {
         console.log(`Class ${numClass}:`, classes.name);
         console.log("Teacher:", classes.teacher.firstName + " " + classes.teacher.lastName + ", " + classes.teacher.professions);
         console.log("Students:");
         numClass++;
+
         let numStudent: number = 1;
-        for (const students of classes.students){
-            console.log(`${numStudent}: ${students.firstName} ${students.lastName}:`,getAge(students));
+
+        const sortedStudentsByLastName: Student[] = classes.students.sort((a, b) => (
+            a.lastName + a.firstName).toLowerCase() < (b.lastName + b.firstName).toLowerCase() ? -1 : 1)
+
+        for (const students of sortedStudentsByLastName) {
+            console.log(`${numStudent}: ${students.firstName} ${students.lastName}:`, getAge(students));
             numStudent++;
         }
     }

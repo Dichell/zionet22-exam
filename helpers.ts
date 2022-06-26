@@ -15,7 +15,3 @@ export function getRandomBirthDate(): Date {
 export function fullName(student: Student): string {
     return student.firstName + " " + student.lastName;
 }
-
-// console.log("Exam 4:", fullName("Kole", "Dow"))
-
-
