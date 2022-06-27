@@ -8,7 +8,11 @@ export type Student = {
     firstName: string;
     lastName: string;
     birthDate: Date;
-    age: () => number;
+    age: () => number {
+        const ageDiffMs = Date.now() - birthDate.getTime();
+        const ageDate = new Date(ageDiffMs);
+        return Math.abs(ageDate.getFullYear()-1970);
+    };
 };
 
 export type Classroom = {
