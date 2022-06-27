@@ -38,4 +38,4 @@ export const teacherProff: string[] = [
     "Driver"
 ];
 
-console.log(History)
+// console.log(History)

@@ -82,12 +82,14 @@ export function getClassYoungestStudent(classroom: Classroom): string {
 
 
 export function transferStudent(fullName: string, fromClassroom: Classroom, toClassrom: Classroom): string {
-    const findFullnameIndex: number = fromClassroom.students.findIndex((a: Student) => a.fullName() === fullName);
-    if (findFullnameIndex != -1) {
-        const extractedStudent: Student[] = fromClassroom.students.splice(findFullnameIndex, 1);
-        toClassrom.students = toClassrom.students.concat(extractedStudent);
-        return `${fullName} transfered`;
-    } return `${fullName} not found`;
+    if (toClassrom) {
+        const findFullnameIndex: number = fromClassroom.students.findIndex((a: Student) => a.fullName() === fullName);
+        if (findFullnameIndex != -1) {
+            const extractedStudent: Student[] = fromClassroom.students.splice(findFullnameIndex, 1);
+            toClassrom.students = toClassrom.students.concat(extractedStudent);
+            return `${fullName} transfered`;
+        } return `${fullName} not found`;
+    } return "We have only 1 class";
 }
 
 
@@ -101,7 +103,7 @@ export function printSchool(school: School): void {
     let numberClass: number = 1;
     const sortedClasses: Classroom[] = school.classes.sort((a: Classroom, b: Classroom) => a.name < b.name ? -1 : 1)
     for (const classes of sortedClasses) {
-        console.log(`Class ${numberClass}:`, classes.name);
+        console.log(`\nClass ${numberClass}:`, classes.name);
         console.log("Teacher:", classes.teacher.fullName() + ", " + classes.teacher.professions);
         console.log("Students:");
         numberClass++;

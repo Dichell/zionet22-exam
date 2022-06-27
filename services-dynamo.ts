@@ -12,12 +12,10 @@ import { fullName, getRandomBirthDate, getRandomValueFromArray } from "./helpers
 //     }
 // };
 
-function createDynamoClass(): School {
+export function createDynamoClass(): School {
 
-    const arrayOfClass: Classroom[] = [];
-
-    const randomNumClasses = Math.floor(Math.random() * (5 - 1 + 1) + 1)
-    const randomNumStudents = Math.floor(Math.random() * (30 - 3 + 3) + 3)
+    const arrayOfClasses: Classroom[] = [];
+    const randomNumClasses = Math.floor(Math.random() * (5 - 1 + 1) + 1);
 
     for (let numClasses = 0; numClasses < randomNumClasses; numClasses++) {
         const className: string = getRandomValueFromArray(classesNames);
@@ -27,17 +25,21 @@ function createDynamoClass(): School {
             [getRandomValueFromArray(teacherProff)]);
 
         const arrayOfStudents: Student[] = [];
+        const randomNumStudents = Math.floor(Math.random() * (30 - 3 + 3) + 3)
+
         for (let numStudents = 0; numStudents < randomNumStudents; numStudents++) {
             const students: Student = createStudent(getRandomValueFromArray(firstNames), getRandomValueFromArray(lastNames), getRandomBirthDate());
             arrayOfStudents.push(students)
         }
-        arrayOfClass.push(className, teacher, arrayOfStudents)
+        
+        const classIsReady: Classroom = createClassroom(className, teacher, arrayOfStudents) 
+        arrayOfClasses.push(classIsReady)
     } 
     return {
         name: "School Dynamo",
         address: "Spb, Nevskiy-1",
         phone: "+7-812-345-67-89",
-        classes: arrayOfClass
+        classes: arrayOfClasses
     };
 };
 
@@ -66,6 +68,14 @@ function createStudent(firstName: string, lastName: string, birthDate: Date): St
         fullName: function (): string {
             return firstName + " " + lastName;
         }
+    };
+}
+
+function createClassroom(name: string, teacher: Teacher, students: Student[]): Classroom {
+    return {
+        name,
+        teacher,
+        students
     };
 }
 
