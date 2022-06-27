@@ -3,6 +3,7 @@ import { fullName } from "./helpers";
 import { getClassYoungestStudent as getClassYoungestStudentFullName, initializeSchool, printSchool, transferStudent } from "./services";
 import { createDynamoClass } from "./services-dynamo";
 
+// const school: School = initializeSchool();
 const school: School = createDynamoClass();
 
 printSchool(school);
