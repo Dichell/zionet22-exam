@@ -76,16 +76,16 @@ function createClassroom(name: string, teacher: Teacher, students: Student[]): C
 
 
 export function getClassYoungestStudent(classroom: Classroom): string {
-    const sortedStudents: Student[] = classroom.students.sort((a, b) => a.birthDate < b.birthDate ? 1 : -1)
+    const sortedStudents: Student[] = classroom.students.sort((a:Student, b:Student) => a.birthDate < b.birthDate ? 1 : -1)
     return fullName(sortedStudents[0]);
 }
 
 
-export function transferStudent(fullName: string, fromClassroom: Classroom, toClassrom: Classroom): void | string {
-    const findFullnameIndex: number = fromClassroom.students.findIndex(a => a.fullName() === fullName);
+export function transferStudent(fullName: string, fromClassroom: Classroom, toClassrom: Classroom): string {
+    const findFullnameIndex: number = fromClassroom.students.findIndex((a: Student) => a.fullName() === fullName);
     if (findFullnameIndex != -1) {
-        const extractedStudents: Student[] = fromClassroom.students.splice(findFullnameIndex, 1);
-        toClassrom.students = toClassrom.students.concat(extractedStudents);
+        const extractedStudent: Student[] = fromClassroom.students.splice(findFullnameIndex, 1);
+        toClassrom.students = toClassrom.students.concat(extractedStudent);
         return `${fullName} transfered`;
     } return `${fullName} not found`;
 }
@@ -99,7 +99,7 @@ export function printSchool(school: School): void {
     console.log("\nClasses:\n============");
 
     let numberClass: number = 1;
-    const sortedClasses: Classroom[] = school.classes.sort((a, b) => a.name < b.name ? -1 : 1)
+    const sortedClasses: Classroom[] = school.classes.sort((a: Classroom, b: Classroom) => a.name < b.name ? -1 : 1)
     for (const classes of sortedClasses) {
         console.log(`Class ${numberClass}:`, classes.name);
         console.log("Teacher:", classes.teacher.fullName() + ", " + classes.teacher.professions);
@@ -107,7 +107,7 @@ export function printSchool(school: School): void {
         numberClass++;
 
         let numberStudent: number = 1;
-        const sortedStudentsByLastName: Student[] = classes.students.sort((a, b) => (
+        const sortedStudentsByLastName: Student[] = classes.students.sort((a:Student, b:Student) => (
             a.lastName + a.firstName).toLowerCase() < (b.lastName + b.firstName).toLowerCase() ? -1 : 1)
 
         for (const students of sortedStudentsByLastName) {
