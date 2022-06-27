@@ -22,3 +22,4 @@ export const lastNames: string[] = [
     "Fyodorov"
 ];
 
+console.log(History)

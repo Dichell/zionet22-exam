@@ -39,20 +39,28 @@ export function initializeSchool(): School {
 
 function createTeacher(firstName: string, lastName: string, professions: string[]): Teacher {
     return {
-        firstName: firstName,
-        lastName: lastName,
-        professions: professions
+        firstName,
+        lastName,
+        professions,
+        fullName: function ():string {
+                return firstName + " " + lastName;
+        }
     };
 }
 
 
 function createStudent(firstName: string, lastName: string, birthDate: Date): Student {
     return {
-        firstName: firstName,
-        lastName: lastName,
-        birthDate: birthDate,
-        age: () => {
-            return 0;
+        firstName,
+        lastName,
+        birthDate,
+        age: function ():number {
+                const ageDiffMs = Date.now() - birthDate.getTime();
+                const ageDate = new Date(ageDiffMs);
+                return Math.abs(ageDate.getFullYear() - 1970);
+            },
+        fullName: function ():string {
+                return firstName + " " + lastName;
         }
     };
 }
@@ -60,28 +68,26 @@ function createStudent(firstName: string, lastName: string, birthDate: Date): St
 
 function createClassroom(name: string, teacher: Teacher, students: Student[]): Classroom {
     return {
-        name: name,
-        teacher: teacher,
-        students: students
+        name,
+        teacher,
+        students
     };
 }
 
 
 export function getClassYoungestStudent(classroom: Classroom): string {
-    const sortedStudents: Student[] = classroom.students.sort((a, b) => getAge(a) - getAge(b))
+    const sortedStudents: Student[] = classroom.students.sort((a, b) => a.birthDate < b.birthDate ? 1 : -1)
     return fullName(sortedStudents[0]);
 }
 
 
-export function getAge(student: Student): number {
-    const ageDifferentMs: number = Date.now() - student.birthDate.getTime();
-    let ageDate: Date = new Date(ageDifferentMs)
-    return Math.abs(ageDate.getUTCFullYear() - 1969);
-};
+export function transferStudent(fullName: string, fromClassroom: Classroom, toClassrom: Classroom): Student[] | string {
+    const findFullnameIndex: number = fromClassroom.students.findIndex(a => a.firstName === fullName);
 
-
-export function transferStudent(fullName: string, fromClassroom: Classroom, toClassrom: Classroom): void {
-    
+    if (findFullnameIndex !== -1) {
+        const extractedStudents: Student[] = fromClassroom.students.splice(findFullnameIndex, 1);
+        return toClassrom.students = toClassrom.students.concat(extractedStudents);
+    } return `${fullName} not found`;
 }
 
 
@@ -92,20 +98,21 @@ export function printSchool(school: School): void {
     console.log(school.phone);
     console.log("\nClasses:\n============");
     
-    let orderClass: number = 1;
+    let numberClass: number = 1;
     const sortedClasses: Classroom[] = school.classes.sort((a, b) => a.name < b.name ? -1 : 1)
     for (const classes of sortedClasses) {
-        console.log(`Class ${orderClass}:`, classes.name);
-        console.log("Teacher:", classes.teacher.firstName + " " + classes.teacher.lastName + ", " + classes.teacher.professions);
+        console.log(`Class ${numberClass}:`, classes.name);
+        console.log("Teacher:", classes.teacher.fullName() + ", " + classes.teacher.professions);
         console.log("Students:");
-        orderClass++;
+        numberClass++;
 
-        let orderStudents: number = 1;
+        let numberStudent: number = 1;
         const sortedStudentsByLastName: Student[] = classes.students.sort((a, b) => (
             a.lastName + a.firstName).toLowerCase() < (b.lastName + b.firstName).toLowerCase() ? -1 : 1)
+
         for (const students of sortedStudentsByLastName) {
-            console.log(`${orderStudents}: ${students.firstName} ${students.lastName}:`, getAge(students));
-            orderStudents++;
+            console.log(`${numberStudent}: ${students.fullName()}: ${students.age()}`);
+            numberStudent++;
         }
     }
 }

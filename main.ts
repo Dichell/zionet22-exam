@@ -6,9 +6,9 @@ const school: School = initializeSchool();
 
 printSchool(school);
 
-console.log("\nExam 4 - FullName:", fullName(school.classes[0].students[0]), "\n")
+// console.log("\nExam 4 - FullName:", fullName(school.classes[0].students[0]), "\n")
 
-console.log("Exam 5 - Yongest Student:", getClassYoungestStudentFullName(school.classes[0]), "\n");
+// console.log("Exam 5 - Yongest Student:", getClassYoungestStudentFullName(school.classes[0]), "\n");
 
-console.log("Transfer:", transferStudent("Ivan", school.classes[0], school.classes[1]), "\n");
+console.log("\nTransfer:", transferStudent("Oleg", school.classes[0], school.classes[1]), "\n");
 printSchool(school);

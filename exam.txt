@@ -24,7 +24,8 @@ Class 2 (in case exists and so on iterating over the sholw collection of classro
 
 (5%) 4. Add fullName() method to helpers.ts that receives firstName and lastName;
 	(2%) 4.1. Add fullName() method to Teacher and Student types that utilizes method added in #4.
-	(2%) 4.2. Refactor the code of printSchool() to use the relevant type fullName() method instead of referencing properties of firstName and lastName.
+	(2%) 4.2. Refactor the code of printSchool() to use the relevant type fullName() method 
+	instead of referencing properties of firstName and lastName.
 
 (15%) 5. Fix the logic for getClassYoungestStudent().
 
