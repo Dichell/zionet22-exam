@@ -22,4 +22,20 @@ export const lastNames: string[] = [
     "Fyodorov"
 ];
 
+export const classesNames: string[] = [
+    "Math",
+    "Geography",
+    "History",
+    "FullStack",
+    "Management"
+];
+
+export const teacherProff: string[] = [
+    "Teacher",
+    "Manager",
+    "Politic",
+    "Programmer",
+    "Driver"
+];
+
 console.log(History)
