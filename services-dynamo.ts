@@ -7,7 +7,7 @@ import { getRandomBirthDate, getRandomValueFromArray } from "./helpers";
 export function createDynamoClass(): School {
 
     const arrayOfClasses: Classroom[] = [];
-    const randomNumClasses = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+    const randomNumClasses = Math.floor(Math.random() * 5 + 1);
 
     for (let numClasses = 0; numClasses < randomNumClasses; numClasses++) {
         const className: string = getRandomValueFromArray(classesNames);
@@ -17,7 +17,7 @@ export function createDynamoClass(): School {
             [getRandomValueFromArray(teacherProff)]);
 
         const arrayOfStudents: Student[] = [];
-        const randomNumStudents = Math.floor(Math.random() * (30 - 3 + 3) + 3)
+        const randomNumStudents = Math.floor(Math.random() * 30 + 3)
 
         for (let numStudents = 0; numStudents < randomNumStudents; numStudents++) {
             const students: Student = createStudent(getRandomValueFromArray(firstNames), getRandomValueFromArray(lastNames), getRandomBirthDate());
