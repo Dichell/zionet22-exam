@@ -87,7 +87,7 @@ export function transferStudent(fullName: string, fromClassroom: Classroom, toCl
         if (findFullnameIndex != -1) {
             const extractedStudent: Student[] = fromClassroom.students.splice(findFullnameIndex, 1);
             toClassrom.students = toClassrom.students.concat(extractedStudent);
-            return `${fullName} transfered`;
+            return `${fullName} transfered from ${fromClassroom.name} to ${toClassrom.name}`;
         } return `${fullName} not found`;
     } return "We have only 1 class";
 }

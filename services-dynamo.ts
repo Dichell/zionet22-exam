@@ -1,16 +1,8 @@
 import { match } from "assert";
-import { classesNames, firstNames, Geography, lastNames, Mathematics, teacherProff } from "./constants";
+import { classesNames, firstNames, lastNames, teacherProff } from "./constants";
 import { Classroom, School, Student, Teacher } from "./entities";
-import { fullName, getRandomBirthDate, getRandomValueFromArray } from "./helpers";
+import { getRandomBirthDate, getRandomValueFromArray } from "./helpers";
 
-// export function createDynamoSchool ():School{
-//     return{
-//         name: "School Dynamo",
-//         address: "Spb, Nevskiy-1",
-//         phone: "+7-812-345-67-89",
-//         classes: createDynamoClass()
-//     }
-// };
 
 export function createDynamoClass(): School {
 
@@ -44,21 +36,25 @@ export function createDynamoClass(): School {
 };
 
 
-function createTeacher(firstName: string, lastName: string, professions: string[]): Teacher {
+function createTeacher(firstName: string, lastPrepName: string, professions: string[]): Teacher {
+    let lastFinishName: string = lastPrepName;
+    firstName.charAt(firstName.length - 1) == "a" ? lastFinishName = lastPrepName + "a"  : lastFinishName = lastPrepName;  // add "a" ending of last name for girls
     return {
-        firstName,
-        lastName,
-        professions,
+        firstName: firstName,
+        lastName: lastFinishName,
+        professions: professions,
         fullName: function (): string {
-            return firstName + " " + lastName;
+            return firstName + " " + lastFinishName;
         }
     };
 }
 
-function createStudent(firstName: string, lastName: string, birthDate: Date): Student {
+function createStudent(firstName: string, lastPrepName: string, birthDate: Date): Student {
+    let lastFinishName: string = "";
+    firstName.charAt(firstName.length - 1) == "a" ? lastFinishName = lastPrepName + "a"  : lastFinishName = lastPrepName;  // add "a" ending of last name for girls
     return {
         firstName,
-        lastName,
+        lastName: lastFinishName,
         birthDate,
         age: function (): number {
             const ageDiffMs = Date.now() - birthDate.getTime();
@@ -66,7 +62,7 @@ function createStudent(firstName: string, lastName: string, birthDate: Date): St
             return Math.abs(ageDate.getFullYear() - 1970);
         },
         fullName: function (): string {
-            return firstName + " " + lastName;
+            return firstName + " " + lastFinishName;
         }
     };
 }
@@ -78,6 +74,3 @@ function createClassroom(name: string, teacher: Teacher, students: Student[]): C
         students
     };
 }
-
-
-console.log(createDynamoClass());

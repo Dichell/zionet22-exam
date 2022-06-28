@@ -11,7 +11,13 @@ export const firstNames: string[] = [
     "Olga",
     "Fyodor",
     "Oleg",
-    "Ksenia"
+    "Ksenia",
+    "Liza",
+    "Dimon",
+    "David",
+    "Daria",
+    "Marina",
+    "Sara"
 ];
 
 export const lastNames: string[] = [
@@ -19,7 +25,10 @@ export const lastNames: string[] = [
     "Ivanov",
     "Sidorov",
     "Kukushkin",
-    "Fyodorov"
+    "Fyodorov",
+    "Popov",
+    "Maximov",
+    "Galkin"
 ];
 
 export const classesNames: string[] = [
