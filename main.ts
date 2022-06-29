@@ -13,7 +13,7 @@ printSchool(school);
 
 console.log("\nTransfer:", 
     transferStudent(
-        "Olga Ivanov", 
+        "Olga Ivanova", 
         school.classes[0], 
         school.classes[1]), "\n"
     );
