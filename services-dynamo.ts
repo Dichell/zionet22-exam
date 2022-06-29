@@ -14,7 +14,8 @@ export function createDynamoClass(): School {
         const teacher: Teacher = createTeacher(
             getRandomValueFromArray(firstNames),
             getRandomValueFromArray(lastNames),
-            [getRandomValueFromArray(teacherProff)]);
+            [getRandomValueFromArray(teacherProff)]
+            );
 
         const arrayOfStudents: Student[] = [];
         const randomNumStudents = Math.floor(Math.random() * 30 + 3)
