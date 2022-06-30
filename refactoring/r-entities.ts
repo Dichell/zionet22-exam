@@ -1,7 +1,3 @@
-import { firstNames, lastNames, teacherProff } from "../constants";
-import { getRandomValueFromArray } from "../helpers";
-
-
 export interface School {
     name: string;
     address: string;
@@ -21,6 +17,7 @@ export interface Teacher {
     firstName: string;
     lastName: string;
     professions: string[];
+    fullName: () => string;
 };
 
 
