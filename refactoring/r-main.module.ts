@@ -16,6 +16,7 @@ function initializeSchool(): void {
     console.log("Yongest student from class 1:", school2.getClassYoungestStudent(school2.school.classes[0]), "\n");
     console.log("Transfer:", school2.transferStudent("Olga Ivanova", school2.school.classes[0], school2.school.classes[1]), "\n");
     school2.printSchool(school2.school);
+    console.log(school2.school.classes[0].students.length)
 }
 
 

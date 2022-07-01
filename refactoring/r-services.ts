@@ -74,8 +74,14 @@ export class SchoolService implements ISchool {
 
 
     public getClassYoungestStudent(classroom: Classroom): string {
+        if (classroom.students.length > 1) {
         const sortedStudents: Student[] = classroom.students.sort((a: Student, b: Student) => a.birthDate < b.birthDate ? 1 : -1)
         return sortedStudents[0].fullName;
+        } 
+        else if (classroom.students.length === 1) {
+            return "The classrom have only 1 student";
+        }
+        return "The class haven't students";
     }
 
 
