@@ -1,4 +1,4 @@
-import { Student } from "./entities";
+import { Student, Teacher } from "./entities";
 
 export function getRandomValueFromArray(array: string[]): string {
     return array[Math.floor(Math.random() * array.length)];
@@ -12,6 +12,6 @@ export function getRandomBirthDate(): Date {
 }
 
 
-export function fullName(student: Student): any {
-    return student.firstName + " " + student.lastName;
+export function fullName(fName: string, lName: string): string {
+    return fName + " " + lName;
 }

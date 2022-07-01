@@ -36,7 +36,6 @@ export function createDynamoClass(): School {
     };
 };
 
-
 function createTeacher(firstName: string, lastPrepName: string, professions: string[]): Teacher {
     let lastFinishName: string = lastPrepName;
     firstName.charAt(firstName.length - 1) == "a" ? lastFinishName = lastPrepName + "a"  : lastFinishName = lastPrepName;  // add "a" ending of last name for girls
