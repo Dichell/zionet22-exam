@@ -15,3 +15,9 @@ export function getRandomBirthDate(): Date {
 export function fullName(fName: string, lName: string): string {
     return fName + " " + lName;
 }
+
+export function ifFirstNameIsGirls (fName: string, lName: string): string{
+    let lastFinishName: string = lName;
+    fName.charAt(fName.length - 1) == "a" ? lastFinishName = lName + "a"  : lastFinishName = lName;  // add "a" ending of last name for girls
+    return lastFinishName;
+}

@@ -17,7 +17,7 @@ export interface Teacher {
     firstName: string;
     lastName: string;
     professions: string[];
-    fullName: () => string;
+    fullName: string;
 };
 
 
@@ -26,6 +26,6 @@ export interface Student {
     lastName: string;
     birthDate: Date;
     age: () => number;
-    fullName: () => string;
+    fullName: string;
 };
 

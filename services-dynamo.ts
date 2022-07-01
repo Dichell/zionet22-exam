@@ -1,7 +1,7 @@
 import { match } from "assert";
 import { classesNames, firstNames, lastNames, teacherProff } from "./constants";
 import { Classroom, School, Student, Teacher } from "./entities";
-import { getRandomBirthDate, getRandomValueFromArray } from "./helpers";
+import { fullName, getRandomBirthDate, getRandomValueFromArray, ifFirstNameIsGirls } from "./helpers";
 
 
 export function createDynamoClass(): School {
@@ -30,40 +30,34 @@ export function createDynamoClass(): School {
     } 
     return {
         name: "School Dynamo",
-        address: "Spb, Nevskiy-1",
+        address: "Spb, Nevskiy-1D",
         phone: "+7-812-345-67-89",
         classes: arrayOfClasses
     };
 };
 
 function createTeacher(firstName: string, lastPrepName: string, professions: string[]): Teacher {
-    let lastFinishName: string = lastPrepName;
-    firstName.charAt(firstName.length - 1) == "a" ? lastFinishName = lastPrepName + "a"  : lastFinishName = lastPrepName;  // add "a" ending of last name for girls
+    const lastFinishName: string = ifFirstNameIsGirls(firstName,lastPrepName);
     return {
         firstName: firstName,
         lastName: lastFinishName,
         professions: professions,
-        fullName: function (): string {
-            return firstName + " " + lastFinishName;
-        }
+        fullName: fullName(firstName, lastFinishName)
     };
 }
 
 function createStudent(firstName: string, lastPrepName: string, birthDate: Date): Student {
-    let lastFinishName: string = "";
-    firstName.charAt(firstName.length - 1) == "a" ? lastFinishName = lastPrepName + "a"  : lastFinishName = lastPrepName;  // add "a" ending of last name for girls
+    const lastFinishName: string = ifFirstNameIsGirls(firstName,lastPrepName);
     return {
         firstName,
-        lastName: lastFinishName,
+        lastName: ifFirstNameIsGirls(firstName,lastPrepName),
         birthDate,
         age: function (): number {
             const ageDiffMs = Date.now() - birthDate.getTime();
             const ageDate = new Date(ageDiffMs);
             return Math.abs(ageDate.getFullYear() - 1970);
         },
-        fullName: function (): string {
-            return firstName + " " + lastFinishName;
-        }
+        fullName: fullName(firstName, lastFinishName)        
     };
 }
 
@@ -74,3 +68,4 @@ function createClassroom(name: string, teacher: Teacher, students: Student[]): C
         students
     };
 }
+

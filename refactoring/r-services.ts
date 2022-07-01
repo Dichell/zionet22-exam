@@ -1,5 +1,5 @@
 import { Classroom, School, Student, Teacher } from "./r-entities";
-import { fullName } from "../helpers";
+import { fullName, ifFirstNameIsGirls } from "../helpers";
 
 
 export interface ISchool {
@@ -39,22 +39,18 @@ export class SchoolService implements ISchool {
     }
 
     public createTeacher(firstName: string, lastPrepName: string, professions: string[]): Teacher {
-        let lastFinishName: string = lastPrepName;
-        firstName.charAt(firstName.length - 1) == "a" ? lastFinishName = lastPrepName + "a" : lastFinishName = lastPrepName;  // add "a" ending of last name for girls
+        const lastFinishName: string = ifFirstNameIsGirls(firstName, lastPrepName);
         return {
-            firstName: firstName,
+            firstName,
             lastName: lastFinishName,
-            professions: professions,
-            fullName: function (): string {
-                return firstName + " " + lastFinishName;
-            }
+            professions,
+            fullName: fullName(firstName, lastFinishName)
         }
     };
 
 
     public createStudent(firstName: string, lastPrepName: string, birthDate: Date): Student {
-        let lastFinishName: string = "";
-        firstName.charAt(firstName.length - 1) == "a" ? lastFinishName = lastPrepName + "a" : lastFinishName = lastPrepName;  // add "a" ending of last name for girls
+        const lastFinishName: string = ifFirstNameIsGirls(firstName, lastPrepName);
         return {
             firstName,
             lastName: lastFinishName,
@@ -64,9 +60,7 @@ export class SchoolService implements ISchool {
                 const ageDate = new Date(ageDiffMs);
                 return Math.abs(ageDate.getFullYear() - 1970);
             },
-            fullName: function (): string {
-                return firstName + " " + lastFinishName;
-            }
+            fullName: fullName(firstName, lastFinishName)
         };
     }
 
@@ -81,13 +75,13 @@ export class SchoolService implements ISchool {
 
     public getClassYoungestStudent(classroom: Classroom): string {
         const sortedStudents: Student[] = classroom.students.sort((a: Student, b: Student) => a.birthDate < b.birthDate ? 1 : -1)
-        return fullName(sortedStudents[0]);
+        return sortedStudents[0].fullName;
     }
 
 
     public transferStudent(fullName: string, fromClassroom: Classroom, toClassrom: Classroom): string {
         if (toClassrom) {
-            const findFullnameIndex: number = fromClassroom.students.findIndex((a: Student) => a.fullName() === fullName);
+            const findFullnameIndex: number = fromClassroom.students.findIndex((a: Student) => a.fullName === fullName);
             if (findFullnameIndex != -1) {
                 const extractedStudent: Student[] = fromClassroom.students.splice(findFullnameIndex, 1);
                 toClassrom.students = toClassrom.students.concat(extractedStudent);
@@ -108,7 +102,7 @@ export class SchoolService implements ISchool {
         const sortedClasses: Classroom[] = school.classes.sort((a: Classroom, b: Classroom) => a.name < b.name ? -1 : 1)
         for (const classes of sortedClasses) {
             console.log(`\nClass ${numberClass}:`, classes.name);
-            console.log("Teacher:", classes.teacher.fullName() + ", " + classes.teacher.professions);
+            console.log("Teacher:", classes.teacher.fullName + ", " + classes.teacher.professions);
             console.log("Students:");
             numberClass++;
 
@@ -117,7 +111,7 @@ export class SchoolService implements ISchool {
                 a.lastName + a.firstName).toLowerCase() < (b.lastName + b.firstName).toLowerCase() ? -1 : 1)
 
             for (const students of sortedStudentsByLastName) {
-                console.log(`${numberStudent}: ${students.fullName()}: ${students.age()}`);
+                console.log(`${numberStudent}: ${students.fullName}: ${students.age()}`);
                 numberStudent++;
             }
         }

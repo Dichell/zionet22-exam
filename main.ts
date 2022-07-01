@@ -8,8 +8,8 @@ const school: School = createDynamoClass();
 
 printSchool(school);
 
-// console.log("\nExam 4 - FullName:", fullName(school.classes[0].students[0]), "\n")
-// console.log("Exam 5 - Yongest Student:", getClassYoungestStudentFullName(school.classes[0]), "\n");
+console.log("\nExam 4 - FullName:", school.classes[0].students[0].fullName, "\n")
+console.log("Exam 5 - Yongest Student:", getClassYoungestStudentFullName(school.classes[0]), "\n");
 
 console.log("\nTransfer:", 
     transferStudent(
