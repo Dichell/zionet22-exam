@@ -81,7 +81,7 @@ export class SchoolService implements ISchool {
         else if (classroom.students.length === 1) {
             return "The classrom have only 1 student";
         }
-        return "The class haven't students";
+        return "The class is empty";
     }
 
 
